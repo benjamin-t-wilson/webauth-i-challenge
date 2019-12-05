@@ -1,6 +1,10 @@
 const db = require("../../data/dbConfig.js");
 const bcrypt = require("bcryptjs");
 
+// this middleware expects username and password to
+// be passed as headers
+// then it selects the user with a matching username
+// then compares the password with the hashed password
 module.exports = (req, res, next) => {
   const { username, password } = req.headers;
 

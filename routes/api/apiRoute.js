@@ -5,6 +5,9 @@ const bcrypt = require("bcryptjs");
 
 const router = express.Router();
 
+// register requires a body with a username and password
+// it hashes the provided password and passes that
+// the hashed password is what gets stored on the backend
 router.post("/register", (req, res) => {
   const info = req.body;
 
@@ -20,6 +23,11 @@ router.post("/register", (req, res) => {
     });
 });
 
+// login expects a username and password on the body
+// then it finds the user by matching the username
+// it checks that a user was in fact returned,
+// as well as if the provided password matches
+// the unhashed version of what is on the backend
 router.post("/login", (req, res) => {
   const { username, password } = req.body;
 
@@ -36,6 +44,9 @@ router.post("/login", (req, res) => {
     });
 });
 
+// this runs a validation middleware before
+// returning an easy list.
+// please refer to the middleware
 router.get("/users", middleware, (req, res) => {
     db.getUsers()
     .then(users => {
