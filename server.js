@@ -1,7 +1,7 @@
 const express = require("express");
 const helmet = require("helmet");
 const session = require("express-session");
-const knexSessionStore = require("connect-section-knex")(session);
+const knexSessionStore = require("connect-session-knex")(session);
 const apiRouter = require("./routes/api/apiRoute.js");
 
 const server = express();
@@ -26,7 +26,7 @@ const sessionConfig = {
   })
 };
 
-server.use(helmet);
+server.use(helmet());
 server.use(express.json());
 server.use(session(sessionConfig));
 server.use("/api", apiRouter);
